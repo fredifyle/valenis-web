@@ -441,7 +441,6 @@ padding:42px 0!important
 .si{padding:36px!important}
 
 /* Footer */
-.fgrid{grid-template-columns:2fr 1fr 1fr 1fr!important}
 
 /* Mobile */
 @media(max-width:900px){
@@ -918,19 +917,25 @@ footer .fh{
         <div class="ci-item"><div class="ci-lbl">Services</div><div class="ci-val" style="font-size:15px;color:var(--mid)">M&amp;A Advisory &nbsp;·&nbsp; Restructuring<br>Private Capital Markets &nbsp;·&nbsp; BlackRhino LP</div></div>
       </div>
       <div class="ctc" style="background:var(--stone-lt)">
-        <div class="fgr">
-          <div class="fg"><label>Full Name</label><input type="text" placeholder="Your name"></div>
-          <div class="fg"><label>Organisation</label><input type="text" placeholder="Company or institution"></div>
-        </div>
-        <div class="fgr">
-          <div class="fg"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
-          <div class="fg"><label>Phone (Optional)</label><input type="tel" placeholder="+44 000 000 0000"></div>
-        </div>
-        <div class="fg"><label>Nature of Enquiry</label><select><option value="" disabled selected>Select advisory service</option><option>Strategic Advisory</option><option>M&amp;A Advisory</option><option>Restructuring</option><option>Private Capital Markets</option></select></div>
-        <div class="fg"><label>Geography</label><select><option value="" disabled selected>Select geography</option><option>Africa</option><option>UAE</option><option>Europe</option><option>Cross-Border</option></select></div>
-        <div class="fg"><label>Message</label><textarea placeholder="Please describe your enquiry briefly. All communications are treated in strict confidence."></textarea></div>
-        <button type="button" class="btn" style="width:100%;padding:17px;letter-spacing:.28em">Submit Confidential Enquiry</button>
-        <p style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.8;text-align:center">All enquiries are treated in strict confidence. A senior member of our team will respond within 2 business days.</p>
+        <form id="enquiryForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="d2759d41-f277-4e99-8bbf-ba4ab37e89e7">
+          <input type="hidden" name="subject" value="New enquiry from Valenis Partners website">
+          <input type="hidden" name="from_name" value="Valenis Partners website">
+          <div class="fgr">
+            <div class="fg"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required></div>
+            <div class="fg"><label>Organisation</label><input type="text" name="organisation" placeholder="Company or institution"></div>
+          </div>
+          <div class="fgr">
+            <div class="fg"><label>Email Address</label><input type="email" name="email" placeholder="your@email.com" required></div>
+            <div class="fg"><label>Phone (Optional)</label><input type="tel" name="phone" placeholder="+44 000 000 0000"></div>
+          </div>
+          <div class="fg"><label>Nature of Enquiry</label><select name="nature_of_enquiry"><option value="" disabled selected>Select advisory service</option><option>Strategic Advisory</option><option>M&amp;A Advisory</option><option>Restructuring</option><option>Private Capital Markets</option></select></div>
+          <div class="fg"><label>Geography</label><select name="geography"><option value="" disabled selected>Select geography</option><option>Africa</option><option>UAE</option><option>Europe</option><option>Cross-Border</option></select></div>
+          <div class="fg"><label>Message</label><textarea name="message" placeholder="Please describe your enquiry briefly. All communications are treated in strict confidence." required></textarea></div>
+          <button type="submit" class="btn" style="width:100%;padding:17px;letter-spacing:.28em">Submit Confidential Enquiry</button>
+          <p id="formStatus" style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.8;text-align:center">All enquiries are treated in strict confidence. A senior member of our team will respond within 2 business days.</p>
+          <p id="formMessage" style="display:none;font-size:11px;margin-top:10px;line-height:1.8;text-align:center"></p>
+        </form>
       </div>
     </div>
   </div></div>
@@ -967,6 +972,33 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 function tM(){var o=document.getElementById('nvo');o.classList.toggle('open');document.body.style.overflow=o.classList.contains('open')?'hidden':'';}
 function cM(){document.getElementById('nvo').classList.remove('open');document.body.style.overflow='';}
+
+const enquiryForm=document.getElementById('enquiryForm');
+const formStatus=document.getElementById('formStatus');
+const formMessage=document.getElementById('formMessage');
+if(enquiryForm){
+  enquiryForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    formMessage.style.display='none';
+    formMessage.textContent='';
+    formMessage.style.color='';
+    const data=new FormData(enquiryForm);
+    try {
+      const response=await fetch(enquiryForm.action,{method:'POST',body:data});
+      const result=await response.json();
+      if(result.success){
+        enquiryForm.reset();
+        formStatus.textContent='Thank you. Your enquiry has been sent successfully.';
+        formStatus.style.color='var(--gold)';
+      } else {
+        throw new Error(result.message || 'Submission failed.');
+      }
+    } catch (err) {
+      formStatus.textContent='We could not send your enquiry right now. Please try again or email info@valenispartners.com.';
+      formStatus.style.color='#b45309';
+    }
+  });
+}
 </script>
 
 <script id="attach-images-to-services">
