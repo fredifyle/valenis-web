@@ -131,7 +131,7 @@ header.sol .hbg span{background:var(--ink)}
   display:flex;align-items:flex-end;overflow:hidden;
 }
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 20%;
-  transform:scale(1.08);animation:hzoom 18s cubic-bezier(.25,0,.25,1) forwards}
+  transform:scale(1.08);animation:hzoom 18s cubic-bezier(.25,0,.25,1) forwards;filter:saturate(90%) contrast(104%) brightness(98%)}
 @keyframes hzoom{to{transform:scale(1)}}
 .hero-ov{
   position:absolute;inset:0;
@@ -260,13 +260,13 @@ header.sol .hbg span{background:var(--ink)}
 
 /* ── IMAGE FEATURE ── */
 .img-f{position:relative;overflow:hidden}
-.img-f img{width:100%;height:100%;object-fit:cover;filter:brightness(.88);transition:transform .9s,filter .5s}
-.img-f:hover img{transform:scale(1.03);filter:brightness(.96)}
+.img-f img{width:100%;height:100%;object-fit:cover;filter:saturate(90%) contrast(104%) brightness(98%);transition:transform .9s,filter .5s}
+.img-f:hover img{transform:scale(1.03);filter:saturate(92%) contrast(106%) brightness(100%)}
 
 /* ── QUOTE — warm stone overlay ── */
 .qsec{position:relative;overflow:hidden}
 .q-img{position:absolute;inset:0;background-size:cover;background-position:center;
-  filter:brightness(.42) sepia(.3)}
+  filter:saturate(88%) contrast(102%) brightness(45%)}
 .q-content{position:relative;z-index:2;padding:132px var(--g);text-align:center;
   max-width:960px;margin:0 auto}
 .qline{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold-lt));
@@ -375,7 +375,7 @@ body{background:#f2ede6!important;}
 /* Hero */
 .hero{height:68vh!important;min-height:540px!important;align-items:center!important}
 .hero::before,.hero::after,.vb-wrap,.hsc,.hline{display:none!important}
-.hero-bg{animation:none!important;transform:none!important;filter:brightness(.82)!important}
+.hero-bg{animation:none!important;transform:none!important;filter:saturate(90%) contrast(104%) brightness(96%)!important}
 .hc{padding:120px 64px 0 64px!important;max-width:1320px!important}
 .hey{font-size:11px!important;letter-spacing:.18em!important;margin-bottom:18px!important}
 .hh1{font-size:clamp(52px,5vw,82px)!important;line-height:1.02!important;font-weight:300!important;max-width:850px!important}
@@ -423,7 +423,7 @@ background:transparent!important
 /* Images restrained */
 .tc{grid-template-columns:1fr!important;gap:24px!important}
 .img-f{height:360px!important}
-.img-f img{height:360px!important;filter:none!important}
+.img-f img{height:360px!important;filter:saturate(90%) contrast(104%) brightness(98%)!important}
 .img-f:hover img{transform:none!important}
 
 /* Principles */
@@ -558,7 +558,7 @@ overflow:hidden !important;
 width:100% !important;
 height:320px !important;
 object-fit:cover !important;
-filter:none !important;
+filter:saturate(90%) contrast(104%) brightness(98%) !important;
 transform:none !important;
 }
 
@@ -716,14 +716,14 @@ footer .fh{
 .hh1{font-size:clamp(44px,4.6vw,72px)!important;max-width:760px!important;line-height:1.02!important;margin-top:0!important}
 
 .pt-t{font-size:26px!important;font-weight:400!important}
-.pt .img-f,.pt .img-f img{height:340px!important}
+.pt .img-f,.pt .img-f img{height:340px!important;filter:saturate(90%) contrast(104%) brightness(98%)!important}
 .pc-d{max-width:82%!important}
 .pc-n{opacity:.22!important}
 
 /* hide redundant hero eyebrow (kept in markup for SEO/structure) */
 .hey{display:none!important}
-/* quote image — natural tone, no filter */
-.q-img{filter:none!important}
+/* quote image — editorial tone */
+.q-img{filter:saturate(88%) contrast(102%) brightness(45%)!important}
 </style></head>
 <body>
 <div id="prog"></div>
